@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:22:52 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/14 16:07:45 by kbeceren         ###   ########.fr       */
+/*   Updated: 2022/12/15 13:43:37 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 
 # include <pthread.h>
 # include <stdio.h>
+# include <limits.h>
+# include <sys/time.h>
+# include <stdlib.h>
 
 typedef struct s_philo
 {
-	pthread_t		thread;
-	struct t_table	*table;
-	
+	struct s_table	*table;
+	int				nb_meal;
+	int				last_meal;
+	int				id;
 }	t_philo;
 
 typedef struct s_table
@@ -30,11 +34,23 @@ typedef struct s_table
 	time_t			time_to_eat;
 	time_t			time_to_sleep;
 	t_philo			*philo;
-	int				nb_meal;
+	int				total_meals;
+	pthread_t		*threads;
+	pthread_mutex_t	*fork;
+	pthread_mutex_t	*death;
+	pthread_mutex_t *status;
 	long			start_time;
-	
+	int				someone_died;
 }	t_table;
 
-
+int		check_input(int argc, char **argv);
+int		init_philosophers(t_table *table);
+int		init_table(t_table *table, int argc, char **argv);
+time_t	get_time(void);
+int		ft_atoi(char *str);
+int		is_digit(char *str);
+void	*philo_routine(void *arg);
+int		ft_create_threads(t_table *table);
+int		ft_create_mutexes(t_table *table);
 
 #endif

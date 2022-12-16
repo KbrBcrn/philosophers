@@ -1,30 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 13:22:47 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/15 13:40:32 by kbeceren         ###   ########.fr       */
+/*   Created: 2022/12/15 13:18:05 by kbeceren          #+#    #+#             */
+/*   Updated: 2022/12/15 13:48:27 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
-{
-	t_table	*table;
 
-	if (!check_input(argc, argv))
-		return (-1);
-	if (!init_table(table, argc, argv))
-	{
-		free_table(table);
-		return (-1);
-	}
-	if (!ft_create_mutexes(table))
-		return (-1);
-	if (!ft_create_threads(table))
-		return (-1);
+void	*philo_routine(void *arg)
+{
+	int		phi;
+	int		next;
+	t_philo *philo;
+	
+	phi = philo->id;
+	next = phi + 1;
+	if (phi == philo->table->nb_philo - 1)
+		next = 0;
+	if (philo->id % 2 == 1)
+		ft_sleep(philo->table, 50);
+	if (philo->table->someone_died == 0)
+		eat_and_sleep(philo, phi, next);
+	return (NULL);
 }
