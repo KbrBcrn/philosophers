@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 12:03:15 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/15 13:41:20 by kbeceren         ###   ########.fr       */
+/*   Updated: 2022/12/19 09:37:29 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_create_mutexes(t_table *table)
 {
 	int	i;
-	
+
 	i = 0;
 	table->fork = malloc((sizeof(pthread_mutex_t)) * table->nb_philo);
 	if (!table->fork)
@@ -42,15 +42,16 @@ int	ft_create_mutexes(t_table *table)
 int	ft_create_threads(t_table *table)
 {
 	int	i;
-	
+
 	i = 0;
 	table->threads = malloc(sizeof(pthread_t) * table->nb_philo);
 	if (!table->threads)
 		return (0);
 	while (i < table->nb_philo)
 	{
-		if (pthread_create(&table->threads[i], NULL, philo_routine, &(table->philo[i])) != 0)
-				return (printf ("Pthread_create() failed."));
+		if (pthread_create(&table->threads[i], NULL,
+				philo_routine, &(table->philo[i])) != 0)
+			return (printf ("Pthread_create() failed."));
 		i++;
 	}
 	return (1);
