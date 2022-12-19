@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 13:22:52 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/15 13:43:37 by kbeceren         ###   ########.fr       */
+/*   Updated: 2022/12/17 21:02:10 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <limits.h>
 # include <sys/time.h>
 # include <stdlib.h>
+
+# define FREE 0
+# define LOCK 1
 
 typedef struct s_philo
 {
@@ -41,6 +44,7 @@ typedef struct s_table
 	pthread_mutex_t *status;
 	long			start_time;
 	int				someone_died;
+	int				are_full;
 }	t_table;
 
 int		check_input(int argc, char **argv);
@@ -52,5 +56,7 @@ int		is_digit(char *str);
 void	*philo_routine(void *arg);
 int		ft_create_threads(t_table *table);
 int		ft_create_mutexes(t_table *table);
+void	ft_sleep(t_table *table, int time);
+void	check_philos_death(t_table *table);
 
 #endif

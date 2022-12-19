@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/08 13:22:47 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/17 21:01:06 by kbeceren         ###   ########.fr       */
+/*   Created: 2022/12/17 17:27:36 by kbeceren          #+#    #+#             */
+/*   Updated: 2022/12/17 21:01:59 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+void	ft_sleep(t_table *table, int time)
 {
-	t_table	*table;
+	long	now;
+	long	start;
 
-	if (!check_input(argc, argv))
-		return (-1);
-	if (!init_table(table, argc, argv))
+	start = get_time();
+	while (table->someone_died == 0)
 	{
-		free_table(table);
-		return (-1);
+		now = time_now();
+		if (now - start >= time)
+			break ;
+		usleep(100);
 	}
-	if (!ft_create_mutexes(table))
-		return (-1);
-	if (!ft_create_threads(table))
-		return (-1);
-	check_philos_death(table);
+}
+
+void	print_philo_status(t_philo *philo, char *status)
+{
+}
+
+void	check_philos_death(t_table *table)
+{
+	
 }
