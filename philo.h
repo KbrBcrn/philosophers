@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 11:10:27 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/21 11:54:22 by kbeceren         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:32:01 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ typedef struct s_table
 	pthread_mutex_t	*write;
 	pthread_mutex_t	*death;
 	atomic_int		nb_philo;
-	atomic_int		total_meals;
+	atomic_int		must_eat;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	long			start_time;
-	atomic_bool		must_eat;
+	atomic_bool		are_full;
 	atomic_bool		someone_died;
 }	t_table;
 

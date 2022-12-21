@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 11:10:01 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/21 11:13:23 by kbeceren         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:27:46 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int	init_table(t_table *table, int argc, char **argv)
 	table->time_to_eat = ft_atoi(argv[3]);
 	table->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		table->total_meals = ft_atoi(argv[5]);
+		table->must_eat = ft_atoi(argv[5]);
 	else
-		table->total_meals = -1;
+		table->must_eat = -1;
 	if (!init_philo(table))
 		return (0);
 	table->start_time = get_time();

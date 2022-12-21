@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 11:10:41 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/21 11:17:08 by kbeceren         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:32:25 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	print_philo_status(t_philo *philo, pthread_mutex_t *mutex, char *str)
 	phi = philo->id + 1;
 	now = get_time() - philo->table->start_time;
 	pthread_mutex_lock(mutex);
-	if (philo->table->someone_died == 0 && philo->table->must_eat == 0)
+	if (philo->table->someone_died == 0 && philo->table->are_full == 0)
 		printf("%ld %d %s", now, phi, str);
 	pthread_mutex_unlock(mutex);
 }
@@ -38,7 +38,7 @@ void	ft_check_philo(t_table *table)
 	int		i;
 	long	now;
 
-	while (table->someone_died == 0 && table->must_eat == 0)
+	while (table->someone_died == 0 && table->are_full == 0)
 	{
 		usleep(100);
 		i = 0;
@@ -57,7 +57,7 @@ void	ft_check_philo(t_table *table)
 			}
 			i++;
 		}
-		if (table->total_meals != -1)
+		if (table->must_eat != -1)
 			ft_check_must_eat(table);
 	}
 }
@@ -67,16 +67,16 @@ void	ft_check_must_eat(t_table *table)
 	int	i;
 
 	i = 0;
-	if (table->total_meals == 0)
-		table->must_eat = 1;
+	if (table->must_eat == 0)
+		table->are_full = 1;
 	while (i < table->nb_philo)
 	{
-		if (table->philo[i].nb_meals < table->total_meals)
+		if (table->philo[i].nb_meals < table->must_eat)
 			break ;
 		i++;
 	}
 	if (i == table->nb_philo)
-		table->must_eat = 1;
+		table->are_full = 1;
 }
 
 void	ft_sleep(t_table *table, int time)

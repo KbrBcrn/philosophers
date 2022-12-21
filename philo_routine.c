@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 11:10:20 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/21 11:54:11 by kbeceren         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:30:25 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	eat_and_sleep(t_philo *philo, int phi, int next)
 {
-	while (philo->table->someone_died == 0 && philo->table->must_eat == 0)
+	while (philo->table->someone_died == 0 && philo->table->are_full == 0)
 	{
 		if (philo->table->nb_philo == 1)
 			continue ;
