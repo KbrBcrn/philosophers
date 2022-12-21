@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 11:10:27 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/21 23:46:40 by kbeceren         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:48:42 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_table
 {
 	t_philo			*philo;
 	pthread_t		*thread_id;
-	pthread_mutex_t	*fork;
+	pthread_mutex_t	*forks;
 	pthread_mutex_t	*write;
 	pthread_mutex_t	*death;
 	atomic_int		nb_philo;

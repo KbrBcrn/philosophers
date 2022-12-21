@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 11:10:34 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/21 23:47:13 by kbeceren         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:49:34 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	ft_create_mutexes(t_table *table)
 	int	i;
 
 	i = 0;
-	table->fork = malloc(sizeof(pthread_mutex_t) * table->nb_philo);
-	if (!table->fork)
+	table->forks = malloc(sizeof(pthread_mutex_t) * table->nb_philo);
+	if (!table->forks)
 		return (0);
 	table->death = malloc(sizeof(pthread_mutex_t));
 	if (!table->death)
@@ -46,7 +46,7 @@ int	ft_create_mutexes(t_table *table)
 		return (0);
 	while (i < table->nb_philo)
 	{
-		if (pthread_mutex_init(&table->fork[i], NULL) != 0)
+		if (pthread_mutex_init(&table->forks[i], NULL) != 0)
 			return (printf("Pthread_mutex_init() failed."));
 		i++;
 	}
@@ -74,7 +74,7 @@ int	ft_destroy(t_table *table)
 		return (printf("Pthread_mutex_destroy() failed."));
 	while (i < table->nb_philo)
 	{
-		if (pthread_mutex_destroy(&table->fork[i]))
+		if (pthread_mutex_destroy(&table->forks[i]))
 			return (printf("Pthread_mutex_destroy() failed."));
 		i++;
 	}
@@ -82,6 +82,6 @@ int	ft_destroy(t_table *table)
 	free (table->death);
 	free (table->philo);
 	free (table->thread_id);
-	free (table->fork);
+	free (table->forks);
 	return (1);
 }
