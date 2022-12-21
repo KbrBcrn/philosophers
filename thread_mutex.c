@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 11:10:34 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/21 11:20:07 by kbeceren         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:47:13 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int	ft_create_threads(t_table *table)
 	int		i;
 
 	i = 0;
-	table->tid = malloc(sizeof(pthread_t) * table->nb_philo);
-	if (!table->tid)
+	table->thread_id = malloc(sizeof(pthread_t) * table->nb_philo);
+	if (!table->thread_id)
 		return (0);
 	while (i < table->nb_philo)
 	{
-		if (pthread_create(&table->tid[i], NULL, (void *)philo_routine,
+		if (pthread_create(&table->thread_id[i], NULL, (void *)philo_routine,
 				&(table->philo[i])) != 0)
 			return (printf("Pthread_create() failed."));
 		i++;
@@ -64,7 +64,7 @@ int	ft_destroy(t_table *table)
 	i = 0;
 	while (i < table->nb_philo)
 	{
-		if (pthread_join(table->tid[i], NULL) != 0)
+		if (pthread_join(table->thread_id[i], NULL) != 0)
 			return (printf("Pthread_join() failed."));
 		i++;
 	}
@@ -81,7 +81,7 @@ int	ft_destroy(t_table *table)
 	free (table->write);
 	free (table->death);
 	free (table->philo);
-	free (table->tid);
+	free (table->thread_id);
 	free (table->fork);
 	return (1);
 }
