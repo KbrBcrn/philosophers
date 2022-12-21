@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 11:10:01 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/21 23:27:46 by kbeceren         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:35:31 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	init_philo(t_table *table)
 		return (0);
 	while (i < table->nb_philo)
 	{
-		table->philo[i].nb_meals = 0;
+		table->philo[i].eat_count = 0;
 		table->philo[i].last_meal = get_time();
 		table->philo[i].id = i;
 		table->philo[i].table = table;

@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 11:10:27 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/21 23:32:01 by kbeceren         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:34:37 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_philo
 	int				id;
 	int				state;
 	atomic_long		last_meal;
-	atomic_int		nb_meals;
+	atomic_int		eat_count;
 	struct s_table	*table;
 }	t_philo;
 

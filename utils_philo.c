@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 11:10:41 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/21 23:32:25 by kbeceren         ###   ########.fr       */
+/*   Updated: 2022/12/21 23:35:13 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	ft_check_must_eat(t_table *table)
 		table->are_full = 1;
 	while (i < table->nb_philo)
 	{
-		if (table->philo[i].nb_meals < table->must_eat)
+		if (table->philo[i].eat_count < table->must_eat)
 			break ;
 		i++;
 	}
