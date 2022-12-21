@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/19 20:14:48 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/20 12:39:10 by kbeceren         ###   ########.fr       */
+/*   Created: 2022/12/21 11:10:27 by kbeceren          #+#    #+#             */
+/*   Updated: 2022/12/21 11:19:33 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,53 +21,50 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <unistd.h>
+# include <stdatomic.h>
+# include <stdbool.h>
+
+struct	s_table;
 
 typedef struct s_philo
 {
-	struct s_table	*table;
-	int				last_eat;
 	int				id;
-	int				l_fork;
-	int				r_fork;
-	int				eat_count;
+	int				state;
+	atomic_long		last_meal;
+	atomic_int		nb_meals;
+	struct s_table	*table;
 }	t_philo;
 
 typedef struct s_table
 {
-	unsigned int	nb_philo;
-	time_t			time_to_die;
-	time_t			time_to_eat;
-	time_t			time_to_sleep;
-	int				must_eat;
 	t_philo			*philo;
-	pthread_mutex_t	*forks;
+	pthread_t		*tid;
+	pthread_mutex_t	*fork;
 	pthread_mutex_t	*write;
 	pthread_mutex_t	*death;
-	pthread_t		*thread_id;
-	int				someone_died;
-	int				start_time;
-	int				nb_meals;
+	atomic_int		nb_philo;
+	atomic_int		total_meals;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	long			start_time;
+	atomic_bool		must_eat;
+	atomic_bool		someone_died;
 }	t_table;
 
-// init.c
-int		check_input(int argc, char **argv);
-int		is_digit(char *str);
-t_table	*init_table(int argc, char **argv);
 int		ft_atoi(char *str);
-t_philo *init_philo(t_table *table);
-
-int	ft_create_mutexes(t_table *table);
-int	ft_create_threads(t_table *table);
-
-int	philo_routine(t_philo *philo);
-void	eat_and_sleep(t_philo *philo);
-
+int		is_digit(char *str);
+void	ft_sleep(t_table *table, int time);
 long	get_time(void);
-void	print_philo_status(t_philo *philo, pthread_mutex_t *mutex, char *str);
 void	ft_check_philo(t_table *table);
 void	ft_check_must_eat(t_table *table);
-void	ft_sleep(t_table *table, int time);
+void	print_philo_status(t_philo *philo, pthread_mutex_t *mutex, char *str);
+
+int		check_input(int argc, char **argv);
+int		init_table(t_table *table, int argc, char **argv);
+int		ft_create_threads(t_table *table);
+int		ft_create_mutexes(t_table *table);
 int		ft_destroy(t_table *table);
+int		philo_routine(t_philo *philo);
 
-
-# endif
+#endif

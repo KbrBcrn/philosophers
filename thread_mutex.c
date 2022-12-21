@@ -5,26 +5,50 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/19 23:14:58 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/20 12:45:14 by kbeceren         ###   ########.fr       */
+/*   Created: 2022/12/21 11:10:34 by kbeceren          #+#    #+#             */
+/*   Updated: 2022/12/21 11:20:07 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+int	ft_create_threads(t_table *table)
+{
+	int		i;
+
+	i = 0;
+	table->tid = malloc(sizeof(pthread_t) * table->nb_philo);
+	if (!table->tid)
+		return (0);
+	while (i < table->nb_philo)
+	{
+		if (pthread_create(&table->tid[i], NULL, (void *)philo_routine,
+				&(table->philo[i])) != 0)
+			return (printf("Pthread_create() failed."));
+		i++;
+	}
+	return (1);
+}
+
 int	ft_create_mutexes(t_table *table)
 {
-	int	index;
+	int	i;
 
-	table->forks = malloc(sizeof(pthread_mutex_t) * table->nb_philo);
-	if (!table->forks)
+	i = 0;
+	table->fork = malloc(sizeof(pthread_mutex_t) * table->nb_philo);
+	if (!table->fork)
 		return (0);
-	index = 0;
-	while (index < table->nb_philo)
+	table->death = malloc(sizeof(pthread_mutex_t));
+	if (!table->death)
+		return (0);
+	table->write = malloc(sizeof(pthread_mutex_t));
+	if (!table->write)
+		return (0);
+	while (i < table->nb_philo)
 	{
-		if (pthread_mutex_init(&table->forks[index], NULL) != 0)
+		if (pthread_mutex_init(&table->fork[i], NULL) != 0)
 			return (printf("Pthread_mutex_init() failed."));
-		index++;
+		i++;
 	}
 	if (pthread_mutex_init(table->write, NULL) != 0)
 		return (printf("Pthread_mutex_init() failed."));
@@ -33,20 +57,31 @@ int	ft_create_mutexes(t_table *table)
 	return (1);
 }
 
-int	ft_create_threads(t_table *table)
+int	ft_destroy(t_table *table)
 {
 	int	i;
 
 	i = 0;
-	table->thread_id= malloc(sizeof(pthread_t) * table->nb_philo);
-	if (!table->thread_id)
-		return (0);
 	while (i < table->nb_philo)
 	{
-		if (pthread_create(&table->thread_id[i], NULL, (void *)philo_routine,
-				&(table->philo[i])) != 0)
-			return (printf("Pthread_create() failed."));
+		if (pthread_join(table->tid[i], NULL) != 0)
+			return (printf("Pthread_join() failed."));
 		i++;
 	}
+	i = 0;
+	if (pthread_mutex_destroy(table->write)
+		|| pthread_mutex_destroy(table->death))
+		return (printf("Pthread_mutex_destroy() failed."));
+	while (i < table->nb_philo)
+	{
+		if (pthread_mutex_destroy(&table->fork[i]))
+			return (printf("Pthread_mutex_destroy() failed."));
+		i++;
+	}
+	free (table->write);
+	free (table->death);
+	free (table->philo);
+	free (table->tid);
+	free (table->fork);
 	return (1);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/19 20:14:13 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/20 12:45:28 by kbeceren         ###   ########.fr       */
+/*   Created: 2022/12/21 11:10:07 by kbeceren          #+#    #+#             */
+/*   Updated: 2022/12/21 11:10:09 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 int	main(int argc, char **argv)
 {
-	t_table *table;
-	
-	table = NULL;
-	if (!check_input(argc, argv))
+	t_table	table;
+
+	if (!init_table(&table, argc, argv))
 		return (1);
-	table = init_table(argc, argv);
-	if (!ft_create_mutexes(table))
+	if (!ft_create_mutexes(&table))
 		return (1);
-	// if (!ft_create_threads(table))
-	// 	return (1);
-	// ft_check_philo(table);
-	// if (!ft_destroy(table))
-	// 	return (1);
-	// return (0);
+	if (!ft_create_threads(&table))
+		return (1);
+	ft_check_philo(&table);
+	if (!ft_destroy(&table))
+		return (1);
+	return (0);
 }

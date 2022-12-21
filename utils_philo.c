@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_routine.c                                    :+:      :+:    :+:   */
+/*   utils_philo.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/20 00:24:15 by kbeceren          #+#    #+#             */
-/*   Updated: 2022/12/20 00:57:29 by kbeceren         ###   ########.fr       */
+/*   Created: 2022/12/21 11:10:41 by kbeceren          #+#    #+#             */
+/*   Updated: 2022/12/21 11:17:08 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ft_check_philo(t_table *table)
 		while (i < table->nb_philo)
 		{
 			now = get_time();
-			if (now >= table->philo[i].last_eat + table->time_to_die)
+			if (now >= table->philo[i].last_meal + table->time_to_die)
 			{
 				pthread_mutex_lock(table->death);
 				pthread_mutex_lock(table->write);
@@ -57,7 +57,7 @@ void	ft_check_philo(t_table *table)
 			}
 			i++;
 		}
-		if (table->nb_meals != -1)
+		if (table->total_meals != -1)
 			ft_check_must_eat(table);
 	}
 }
@@ -67,11 +67,11 @@ void	ft_check_must_eat(t_table *table)
 	int	i;
 
 	i = 0;
-	if (table->nb_meals == 0)
+	if (table->total_meals == 0)
 		table->must_eat = 1;
 	while (i < table->nb_philo)
 	{
-		if (table->philo[i].eat_count< table->nb_meals)
+		if (table->philo[i].nb_meals < table->total_meals)
 			break ;
 		i++;
 	}
@@ -92,33 +92,4 @@ void	ft_sleep(t_table *table, int time)
 			break ;
 		usleep(100);
 	}
-}
-
-int	ft_destroy(t_table *table)
-{
-	int	i;
-
-	i = 0;
-	while (i < table->nb_philo)
-	{
-		if (pthread_join(table->thread_id[i], NULL) != 0)
-			return (printf("Pthread_join() failed."));
-		i++;
-	}
-	i = 0;
-	if (pthread_mutex_destroy(table->write)
-		|| pthread_mutex_destroy(table->death))
-		return (printf("Pthread_mutex_destroy() failed."));
-	while (i < table->nb_philo)
-	{
-		if (pthread_mutex_destroy(&table->forks[i]))
-			return (printf("Pthread_mutex_destroy() failed."));
-		i++;
-	}
-	free (table->write);
-	free (table->death);
-	free (table->philo);
-	free (table->thread_id);
-	free (table->forks);
-	return (1);
 }
