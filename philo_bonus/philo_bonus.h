@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:01:01 by kbeceren          #+#    #+#             */
-/*   Updated: 2023/01/07 22:41:23 by kbeceren         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:05:32 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_table
 	pthread_t		dead;
 	sem_t			*sem_fork;
 	sem_t			*sem_dead;
-	sem_t 			*sem_print;
+	sem_t			*sem_print;
 }	t_table;
 
 int			init(t_table *table, int argc, char **argv);

@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:14:54 by kbeceren          #+#    #+#             */
-/*   Updated: 2023/01/07 22:34:53 by kbeceren         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:05:13 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,12 @@ void	semaphore_init(t_table *table)
 	sem_unlink("sem_print");
 	sem_unlink("sem_dead");
 	table->sem_fork = sem_open("sem_fork", O_CREAT | O_EXCL, 0644,
-					table->nb_philo);
+			table->nb_philo);
 	table->sem_print = sem_open("sem_print", O_CREAT | O_EXCL, 0644, 1);
 	table->sem_dead = sem_open("sem_dead", O_CREAT | O_EXCL, 0644, 1);
 	if (table->sem_fork == SEM_FAILED || table->sem_print == SEM_FAILED
 		|| table->sem_dead == SEM_FAILED)
 		ft_exit("Sem_open() failed");
-		
 }
 
 int	init(t_table *table, int argc, char **argv)

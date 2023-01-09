@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 11:10:41 by kbeceren          #+#    #+#             */
-/*   Updated: 2023/01/07 22:40:04 by kbeceren         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:06:18 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ long	get_time(void)
 	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
-
 
 void	ft_sleep(int time)
 {

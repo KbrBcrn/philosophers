@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 21:12:35 by kbeceren          #+#    #+#             */
-/*   Updated: 2023/01/07 22:36:31 by kbeceren         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:04:38 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	ft_create_processes(t_table *table)
 		else if (table->pid[i] == 0)
 		{
 			table->id = i;
-			break;
+			break ;
 		}
 		i++;
 	}
