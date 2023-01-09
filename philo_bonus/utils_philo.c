@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 11:10:41 by kbeceren          #+#    #+#             */
-/*   Updated: 2023/01/09 12:06:18 by kbeceren         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:27:13 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	sem_for_prints(t_table *table, char *str)
 	sem_post(table->sem_print);
 }
 
-void	ft_destroy(t_table *table)
+int	ft_destroy(t_table *table)
 {
 	sem_close(table->sem_fork);
 	sem_close(table->sem_dead);
@@ -56,4 +56,5 @@ void	ft_destroy(t_table *table)
 	sem_unlink("sem_print");
 	sem_unlink("sem_dead");
 	free (table->pid);
+	return (1);
 }

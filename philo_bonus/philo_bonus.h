@@ -6,7 +6,7 @@
 /*   By: kbeceren <kbeceren@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 11:01:01 by kbeceren          #+#    #+#             */
-/*   Updated: 2023/01/09 12:05:32 by kbeceren         ###   ########.fr       */
+/*   Updated: 2023/01/09 12:27:46 by kbeceren         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ long		get_time(void);
 int			ft_exit(char *str);
 int			is_digit(char *str);
 int			ft_atoi(char *str);
-void		ft_destroy(t_table *table);
+int			ft_destroy(t_table *table);
 
 #endif
