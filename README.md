@@ -35,6 +35,8 @@ A mutex is created to print messages to avoid scrambling.
 
 A mutex is to check the deaths.
 
+Keep in mind to handle zero philo situation and regarding to eveluation instruction handle the situation of more than 200 philosophers. (I couldnot achieve the first evaluation on that account.)
+
  
 ### Some useful resources
 
