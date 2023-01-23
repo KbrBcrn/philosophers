@@ -31,7 +31,7 @@ Each philosopher is a thread. I didnot create an extra thread to check whether p
 
 Each fork is protected by a mutex.
 
-A mutex is created to print messages to avoid scrambling.
+A mutex is created to print messages to avoid a scramble view.
 
 A mutex is to check the deaths.
 
