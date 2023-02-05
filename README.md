@@ -1,6 +1,6 @@
 # Philosophers Project
 
-This project is about concurrent programming(opposed to sequential programming). For the mandatory part, we have to tackle the dining philosopher's problem with threads and mutexes and for the bonus part same problem with smaphores and processes.
+This project is about concurrent programming(opposed to sequential programming). For the mandatory part, we have to tackle the dining philosopher's problem with threads and mutexes and for the bonus part the same problem with smaphores and processes.
 
  ## How to use
  
