@@ -18,11 +18,11 @@ int	check_input(int argc, char **argv)
 
 	i = 1;
 	if (argc < 5 || argc > 6)
-		return (printf("Incorrect number of arguments."));
+		return (ft_exit("Incorrect number of arguments."));
 	while (i < argc)
 	{
 		if (!is_digit(argv[i]))
-			return (printf("Please only enter digits."));
+			return (ft_exit("Please only enter digits."));
 		i++;
 	}
 }
