@@ -7,6 +7,8 @@ This project is about concurrent programming(opposed to sequential programming).
 + make - to compile the obligatory part
 + make bonus - to compile the bonus part
 
++ ./philo <philo_nb> <time_die> <time_eat> <time_slp> [ <must_eat> ]
+
   The program take the following arguments:
 
 * number_of_philosophers: The number of philosophers and also the number of forks.
