@@ -39,7 +39,7 @@ A mutex is to check the deaths.
 
 Keep in mind to handle zero philo situation and regarding to eveluation instruction handle the situation of more than 200 philosophers. (I couldnot achieve the first evaluation on that account.)
 
-*** The main differences between mutex and semaphore;
+*** The main difference between mutex and semaphore;
 
 A mutex is a **locking mechanism** used to synchronize access to a resource. Only one task (can be a thread or process based on OS abstraction) can acquire the mutex. It means there is ownership associated with a mutex, and only the owner can release the lock (mutex).
 
